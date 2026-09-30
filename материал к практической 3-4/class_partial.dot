@@ -1,0 +1,15 @@
+digraph C {
+graph [rankdir=TB, bgcolor="white", pad=0.2, nodesep=0.35, ranksep=0.4];
+node [shape=record, style="filled", fontname="Times New Roman", fontsize=10, color="#2F5597", fillcolor="#F7FBFF"];
+edge [fontname="Times New Roman", fontsize=9, color="#555555"];
+
+app [label="{OrderCalculator|- VAT_RATE: double = 20.0\l- MIN_QUANTITY: int = 1\l- MAX_QUANTITY: int = 10000\l- MIN_UNIT_PRICE: double = 0.0\l- MAX_UNIT_PRICE: double = 5000000.0\l- MIN_DISCOUNT_PERCENT: double = 0.0\l- MAX_DISCOUNT_PERCENT: double = 45.0\l- MONEY_SCALE: int = 2\l|+ main(String[]): void\l+ isValid(int, double, double): boolean\l+ describeInvalid(int, double, double): String\l+ parseInteger(String): Integer\l+ parseDecimal(String): Double\l+ calculateBase(int, double): double\l+ applyDiscount(double, double): double\l+ calculateVat(double, double): double\l+ calculateTotal(int, double, double, double): double\l+ roundMoney(double): double\l+ formatMoney(double): String\l|- normalize(String): String\l- isBlank(String): boolean\l- readLine(Scanner, String): String\l- abort(String): void\l- printReport(int, double, double): void\l}", fillcolor="#FDE9E7", color="#C00000"];
+
+check [label="{SelfCheck|- EPS: double\l- SAMPLE_FILE: String\l- passed: int\l- failures: List<String>\l|+ main(String[]): void\l|- checkOriginalTaskAssertion(): void\l|- checkTypicalValue(): void\l|- checkLowerBounds(): void\l|- checkUpperBounds(): void\l|- checkDiscountBounds(): void\l|- checkMissingValues(): void\l|- checkWrongFormat(): void\l|- checkRepeatedInput(): void\l|- checkOutputFormat(): void\l|- runSampleData(): void\l|- expectedTotal(String[]): double\l|- section(String): void\l|- check(String, boolean): void\l- near(double, double): boolean\l}", fillcolor="#E8F4EA", color="#2E7D32"];
+
+sample [label="{data/sample.csv\lОткрытый набор входных данных\l|quantity;unitPrice;discountPercent\l}", shape=note, fillcolor="#FFF6E5", color="#B26A00"];
+
+check -> sample [label="readAllLines", style=dashed, color="#B26A00"];
+check -> app [label="вызывает", color="#2E7D32"];
+app -> app [label="main читает ввод,\nвызывает методы расчёта", style=dotted, constraint=false, color="#C00000"];
+}
