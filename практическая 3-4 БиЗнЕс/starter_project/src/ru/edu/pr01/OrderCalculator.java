@@ -23,7 +23,7 @@ public class OrderCalculator {
 
     /** 2 TODO 1 — проверка количества, цены и скидки (раздел 7 п.1) */
 
-    /** 2 isValid / errorOf .. раздел 7 п.1  */
+    /** 2 isValid  ... раздел 7 п.1  */
     public static boolean isValid(int quantity, double unitPrice, double discountPercent) {
         return errorOf(quantity, unitPrice, discountPercent) == null;
     }
@@ -43,6 +43,7 @@ public class OrderCalculator {
 
     /** 3 calculate* ......... раздел 7 п.2–3 (НДС после скидки;) */
     public static double calculateBase(int quantity, double unitPrice) {
+
         return round2(quantity * unitPrice);
     }
 
@@ -59,11 +60,10 @@ public class OrderCalculator {
     }
 
     /** TODO 5................. */
-    public static double calculateTotal(int quantity, double unitPrice,
-                                        double discountPercent, double vatPercent) {
+    public static double calculateTotal(int quantity, double unitPrice, double discountPercent, double vatPercent) {
         String error = errorOf(quantity, unitPrice, discountPercent);
         if (error != null)
-            throw new IllegalArgumentException(error + " — расчёт не выполнен"); // раздел 3
+            throw new IllegalArgumentException(error + " - расчёт не выполнен"); // раздел 3
         double discounted = applyDiscount(calculateBase(quantity, unitPrice), discountPercent);
         return round2(discounted + calculateVat(discounted, vatPercent));        // НДС ПОСЛЕ скидки
     }
@@ -128,13 +128,17 @@ public class OrderCalculator {
     /** Как parseInt; понимает русскую запись  */
 
     public static Double parseDouble(String raw) {
-        try { return Double.valueOf(raw.trim().replace(',', '.')); }
-        catch (Exception e) { return null; }
+        try {
+            return Double.valueOf(raw.trim().replace(',', '.')); }
+        catch (Exception e) {
+            return null;
+        }
     }
 
     /** Раздел 7 п.4................... */
 
     public static String rub(double v) {
+
         return String.format(new Locale("ru"), "%.2f руб.", v);
     }
 
