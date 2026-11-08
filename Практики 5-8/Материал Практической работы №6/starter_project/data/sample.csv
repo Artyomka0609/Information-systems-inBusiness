@@ -1,0 +1,5 @@
+amount;urgent;risk;personal
+120000;true;LOW;false
+500000;false;LOW;false
+10000;true;HIGH;false
+10000;true;LOW;true
